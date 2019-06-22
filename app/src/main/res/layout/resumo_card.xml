@@ -13,23 +13,22 @@
                 android:text="@string/receita"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtvReceita" android:layout_marginTop="8dp"
+                android:id="@+id/txtvReceita"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvReceitaValor"
+                app:layout_constraintEnd_toStartOf="@+id/txtvReceitaValor"
                 android:layout_marginEnd="8dp" android:textSize="16dp"/>
         <TextView
                 android:text="@string/valor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvReceitaValor" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:textSize="16dp"/>
+                app:layout_constraintTop_toTopOf="parent" android:textSize="16dp"/>
         <TextView
                 android:text="@string/despesa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvDespesa" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintTop_toBottomOf="@+id/txtvReceita"
+                app:layout_constraintTop_toBottomOf="@+id/txtvReceita"
                 android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvDespesaValor"
                 android:layout_marginEnd="8dp" android:textSize="16dp"/>
         <TextView
@@ -37,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:id="@+id/txtvDespesaValor" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/txtvReceitaValor" android:layout_marginTop="8dp"
                 android:textSize="16dp"/>
         <TextView
@@ -45,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvTotal" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintTop_toBottomOf="@+id/txtvDespesa"
+                app:layout_constraintTop_toBottomOf="@+id/txtvDespesa"
                 android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvTotalValor"
                 android:layout_marginEnd="8dp" android:textSize="16dp"/>
         <TextView
@@ -53,7 +51,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvTotalValor" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/txtvDespesaValor" android:layout_marginTop="8dp"
                 android:textSize="16dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
