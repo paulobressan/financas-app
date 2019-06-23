@@ -6,4 +6,7 @@
     <string name="valor">R$ 0,00</string>
     <string name="adiciona_receita">Adicionar Receita</string>
     <string name="adiciona_despesa">Adicionar Despesa</string>
+    <string name="item_data">21/05/2019</string>
+    <string name="item_descricao">Descrição</string>
+    <string name="img_item">Imagem do item</string>
 </resources>

@@ -7,11 +7,22 @@
         android:layout_height="match_parent"
         tools:context=".ListaTransacoesActivity"
         android:background="@color/colorBackground">
+
     <include
             android:id="@+id/lista_transacoes_resumo"
             layout="@layout/resumo_card"
     />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            fab:layout_constraintTop_toBottomOf="@+id/lista_transacoes_resumo"
+            fab:layout_constraintEnd_toEndOf="parent" fab:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="2dp"
+            fab:layout_constraintBottom_toBottomOf="@+id/lista_transacoes_adiciona_menu"
+            android:layout_marginTop="2dp" android:id="@+id/lista_transacoes_recyclerview"
+            tools:listitem="@layout/transacao_item"/>
     <com.github.clans.fab.FloatingActionMenu
             android:id="@+id/lista_transacoes_adiciona_menu"
             android:layout_width="match_parent"
