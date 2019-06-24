@@ -3,7 +3,10 @@
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                    xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
                                    android:layout_width="match_parent"
-                                   android:layout_height="wrap_content">
+                                   android:layout_height="wrap_content"
+                                   app:cardElevation="0dp" android:layout_marginEnd="4dp"
+                                   android:layout_marginRight="4dp" android:layout_marginLeft="4dp"
+                                   android:layout_marginStart="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -16,13 +19,13 @@
                 android:id="@+id/txtvReceita"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txtvReceitaValor"
-                android:layout_marginEnd="8dp" android:textSize="16dp"/>
+                android:layout_marginEnd="8dp" android:textSize="18sp" android:textAllCaps="true"/>
         <TextView
                 android:text="@string/valor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvReceitaValor" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" android:textSize="16dp"/>
+                app:layout_constraintTop_toTopOf="parent" android:textSize="18sp" android:textStyle="bold"/>
         <TextView
                 android:text="@string/despesa"
                 android:layout_width="0dp"
@@ -30,14 +33,14 @@
                 android:id="@+id/txtvDespesa" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtvReceita"
                 android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvDespesaValor"
-                android:layout_marginEnd="8dp" android:textSize="16dp"/>
+                android:layout_marginEnd="8dp" android:textSize="18sp" android:textAllCaps="true"/>
         <TextView
                 android:text="@string/valor"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:id="@+id/txtvDespesaValor" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtvReceitaValor" android:layout_marginTop="8dp"
-                android:textSize="16dp"/>
+                android:textSize="18sp" android:textStyle="bold"/>
         <TextView
                 android:text="@string/total"
                 android:layout_width="0dp"
@@ -45,13 +48,13 @@
                 android:id="@+id/txtvTotal" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtvDespesa"
                 android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvTotalValor"
-                android:layout_marginEnd="8dp" android:textSize="16dp"/>
+                android:layout_marginEnd="8dp" android:textSize="18sp" android:textAllCaps="true"/>
         <TextView
                 android:text="@string/valor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvTotalValor" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtvDespesaValor" android:layout_marginTop="8dp"
-                android:textSize="16dp"/>
+                android:textSize="18sp" android:textStyle="bold"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

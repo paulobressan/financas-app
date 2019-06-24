@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.paulobressan.financas.R
 import com.paulobressan.financas.enum.TransacaoType
+import com.paulobressan.financas.format
 import com.paulobressan.financas.model.Transacao
 import kotlinx.android.synthetic.main.transacao_item.view.*
 
@@ -37,13 +38,11 @@ class ListaTransacoesAdapter(private val transacoes: List<Transacao>, private va
 
             descricao.text = transacao.descricao
             valor.text = transacao.valor.toString()
-            data.text = transacao.data.toString()
-            if (transacao.transacaoType.equals(TransacaoType.despesa)) {
-                image.setBackgroundResource(R.drawable.icone_transacao_item_despesa)
-            } else {
-                image.setBackgroundResource(R.drawable.icone_transacao_item_receita)
+            data.text = transacao.data.format("dd/MM/yyyy")
+            when (transacao.transacaoType) {
+                TransacaoType.despesa -> image.setImageResource(R.drawable.icone_transacao_item_despesa)
+                TransacaoType.receita -> image.setImageResource(R.drawable.icone_transacao_item_receita)
             }
         }
-
     }
 }
