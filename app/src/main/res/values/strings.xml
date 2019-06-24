@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Finanças</string>
-    <string name="receita">Receita</string>
-    <string name="despesa">Despesa</string>
+    <string name="revenue">Receita</string>
+    <string name="expense">Despesa</string>
     <string name="total">Total</string>
     <string name="valor">R$ 0,00</string>
-    <string name="adiciona_receita">Adicionar Receita</string>
-    <string name="adiciona_despesa">Adicionar Despesa</string>
-    <string name="item_data">21/05/2019</string>
-    <string name="item_descricao">Descrição</string>
-    <string name="img_item">Imagem do item</string>
+    <string name="text_value">R$ %.2f</string>
+    <string name="add_revenue">Adicionar Receita</string>
+    <string name="add_expense">Adicionar Despesa</string>
+    <string name="item_date">21/05/2019</string>
+    <string name="item_description">Descrição</string>
+    <string name="item_image">Imagem do item</string>
 </resources>

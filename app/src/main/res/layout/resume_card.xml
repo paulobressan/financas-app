@@ -13,7 +13,7 @@
             android:layout_height="wrap_content" android:padding="8dp">
 
         <TextView
-                android:text="@string/receita"
+                android:text="@string/revenue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvReceita"
@@ -27,7 +27,7 @@
                 android:id="@+id/txtvReceitaValor" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" android:textSize="18sp" android:textStyle="bold"/>
         <TextView
-                android:text="@string/despesa"
+                android:text="@string/expense"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtvDespesa" app:layout_constraintStart_toStartOf="parent"
