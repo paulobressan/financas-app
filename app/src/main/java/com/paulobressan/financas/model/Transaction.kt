@@ -1,6 +1,5 @@
 package com.paulobressan.financas.model
 
-import com.paulobressan.financas.enum.TransactionType
 import java.util.*
 
 class Transaction(

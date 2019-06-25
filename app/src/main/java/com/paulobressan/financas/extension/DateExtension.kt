@@ -1,4 +1,4 @@
-package com.paulobressan.financas
+package com.paulobressan.financas.extension
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

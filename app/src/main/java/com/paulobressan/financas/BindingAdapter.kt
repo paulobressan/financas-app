@@ -4,6 +4,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.paulobressan.financas.enum.TransactionType
+import com.paulobressan.financas.extension.format
 import java.util.*
 
 @BindingAdapter("app:formatDate")
