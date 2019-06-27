@@ -8,7 +8,7 @@
     <string name="add_revenue">Adicionar Receita</string>
     <string name="add_expense">Adicionar Despesa</string>
     <string name="item_date">21/05/2019</string>
-    <string name="item_description">Descrição</string>
+    <string name="text_category">Categoria</string>
     <string name="item_image">Imagem do item</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -29,14 +29,6 @@ class TransactionAdapter(private val transaction: List<Transaction>, private val
     class ViewHolder(private val binding: ItemTransactionBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(transaction: Transaction) {
             binding.transaction = transaction
-
-//            description.text = transaction.description
-//            valor.text = transaction.value.toString()
-//            data.text = transaction.date.format("dd/MM/yyyy")
-//            when (transaction.transactionType) {
-//                TransactionType.EXPENSE -> image.setImageResource(R.drawable.ic_transaction_expense)
-//                TransactionType.REVENUE -> image.setImageResource(R.drawable.ic_transaction_revenue)
-//            }
         }
     }
 }

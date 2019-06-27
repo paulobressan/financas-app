@@ -7,17 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.paulobressan.financas.R
 import com.paulobressan.financas.databinding.DialogTransactionBinding
+import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
+import com.redmadrobot.inputmask.MaskedTextChangedListener
+import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import java.text.SimpleDateFormat
 
 
-class DialogTransactionFragment(private val title: String, private val transactionType: Int) : DialogFragment() {
+class DialogTransactionFragment(
+    private val title: String,
+    private val transactionType: Int,
+    private val confirm: (transaction: Transaction) -> Unit
+) : DialogFragment() {
+
+    private var categories = listOf(Category(1, "Pagamento Labs"), Category(2, "Alimentação"))
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,21 +37,28 @@ class DialogTransactionFragment(private val title: String, private val transacti
             false
         )
 
-        binding.textTitle.text = this.title
+        setupSuffixSample(binding)
 
+        binding.textTitle.text = this.title
 
         binding.buttonAdd.setOnClickListener {
             var transaction = Transaction(
-                binding.editDescription.text.toString(),
+                categories[binding.spinnerCategories.selectedItemPosition],
                 SimpleDateFormat("dd/MM/yyyy").parse(binding.editDate.text.toString())!!,
                 binding.editValue.text.toString().toDouble(),
                 this.transactionType
             )
 
-            Toast.makeText(activity, "Resultdo: " + transaction.description, Toast.LENGTH_LONG)
-                .show() //mostra o resultado da soma
-
+            confirm(transaction)
+            //Fechar fragmento
+            this.dismiss()
         }
+
+
+        val adapter = CategoryTransactionAdapter(activity as AppCompatActivity, categories)
+
+//        val adapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, categories.map { it.name })
+        binding.spinnerCategories.adapter = adapter
 
         return binding.root
     }
@@ -52,9 +68,27 @@ class DialogTransactionFragment(private val title: String, private val transacti
         this.dialog.window!!.setLayout(MATCH_PARENT, WRAP_CONTENT)
     }
 
+    private fun setupSuffixSample(binding: DialogTransactionBinding) {
+        val affineFormats = listOf(
+            "[00]/[00]/[0000]"
+        )
+
+        MaskedTextChangedListener.installOn(
+            binding.editDate,
+            affineFormats[0],
+            affineFormats,
+            AffinityCalculationStrategy.WHOLE_STRING
+        )
+    }
+
     companion object {
-        fun showDialogTransaction(supportFragmentManager: FragmentManager, title: String, transactionType: Int) {
-            DialogTransactionFragment(title, transactionType)
+        fun showDialogTransaction(
+            supportFragmentManager: FragmentManager,
+            title: String,
+            transactionType: Int,
+            confirm: (transaction: Transaction) -> Unit
+        ) {
+            DialogTransactionFragment(title, transactionType, confirm)
                 .show(supportFragmentManager, null)
         }
     }
