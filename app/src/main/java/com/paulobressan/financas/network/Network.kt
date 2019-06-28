@@ -1,5 +1,6 @@
 package com.paulobressan.financas.network
 
+import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.transaction.TransactionAPI
 import io.reactivex.Observable
@@ -12,6 +13,10 @@ object Network {
 
     fun getTransactions(): Observable<BaseResponse<Transaction>> {
         return getRetrofit().create(TransactionAPI::class.java).getTransactions()
+    }
+
+    fun getCategories(): Observable<BaseResponse<Category>> {
+        return getRetrofit().create(TransactionAPI::class.java).getCategories()
     }
 
     private fun getRetrofit() = Retrofit.Builder()

@@ -15,8 +15,11 @@ import com.paulobressan.financas.R
 import com.paulobressan.financas.databinding.DialogTransactionBinding
 import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
+import com.paulobressan.financas.network.BaseResponse
+import com.paulobressan.financas.transaction.TransactionBusiness
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
+import io.reactivex.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
 
 
@@ -25,42 +28,59 @@ class DialogTransactionFragment(
     private val transactionType: Int,
     private val confirm: (transaction: Transaction) -> Unit
 ) : DialogFragment() {
+    private var compositeDisposable: CompositeDisposable? = null
+    private var transactionBusiness: TransactionBusiness? = null
+    private var binding: DialogTransactionBinding? = null
 
     private var categories = listOf(Category(1, "Pagamento Labs"), Category(2, "Alimentação"))
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = DataBindingUtil.inflate<DialogTransactionBinding>(
+        binding = DataBindingUtil.inflate(
             inflater,
             R.layout.dialog_transaction,
             container,
             false
         )
 
-        setupSuffixSample(binding)
+        compositeDisposable = CompositeDisposable()
+        transactionBusiness = TransactionBusiness()
 
-        binding.textTitle.text = this.title
+        initDialog()
 
-        binding.buttonAdd.setOnClickListener {
+        loadSpinner()
+
+        return binding?.root
+    }
+
+    private fun initDialog() {
+
+        setupSuffixSample(binding!!)
+
+        binding?.textTitle?.text = this.title
+
+        binding?.buttonAdd?.setOnClickListener {
             var transaction = Transaction(
-                categories[binding.spinnerCategories.selectedItemPosition],
-                SimpleDateFormat("dd/MM/yyyy").parse(binding.editDate.text.toString())!!,
-                binding.editValue.text.toString().toDouble(),
+                categories[binding?.spinnerCategories!!.selectedItemPosition],
+                SimpleDateFormat("dd/MM/yyyy").parse(binding?.editDate?.text.toString())!!,
+                binding?.editValue?.text.toString().toDouble(),
                 this.transactionType
             )
 
             confirm(transaction)
-            //Fechar fragmento
             this.dismiss()
         }
+    }
 
+    private fun loadSpinner() {
+        this.compositeDisposable?.add(
+            this.transactionBusiness?.getCategories()!!.subscribe(this::handlerResponse)
+        )
+    }
 
-        val adapter = CategoryTransactionAdapter(activity as AppCompatActivity, categories)
-
-//        val adapter = ArrayAdapter(activity!!, android.R.layout.simple_spinner_item, categories.map { it.name })
-        binding.spinnerCategories.adapter = adapter
-
-        return binding.root
+    private fun handlerResponse(categories: BaseResponse<Category>) {
+        val adapter = CategoryTransactionAdapter(activity as AppCompatActivity, categories.items)
+        binding?.spinnerCategories?.adapter = adapter
     }
 
     override fun onStart() {
