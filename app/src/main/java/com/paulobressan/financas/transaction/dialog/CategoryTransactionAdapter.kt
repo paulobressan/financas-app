@@ -35,5 +35,4 @@ class CategoryTransactionAdapter(private val activity: AppCompatActivity, privat
     override fun getCount(): Int {
         return categories.size
     }
-
 }

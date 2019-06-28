@@ -19,3 +19,11 @@ fun ImageView.setImage(transactionType: Int) {
         TransactionType.REVENUE -> this.setImageResource(R.drawable.ic_transaction_revenue)
     }
 }
+
+@BindingAdapter("app:colorType")
+fun TextView.colorType(transactionType: Int) {
+    when (transactionType) {
+        TransactionType.EXPENSE -> this.setTextColor(context.getColor(R.color.expense))
+        TransactionType.REVENUE -> this.setTextColor(context.getColor(R.color.revenue))
+    }
+}
