@@ -1,6 +1,9 @@
 package com.paulobressan.financas.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Category(
-    val id: Int,
+    @SerializedName("_id")
+    val id: String,
     val name: String
 )

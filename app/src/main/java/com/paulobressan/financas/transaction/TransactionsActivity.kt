@@ -35,7 +35,7 @@ class TransactionsActivity : BaseActivity() {
 
     private fun loadTransactions() {
         this.compositeDisposable?.add(
-            this.transactionBusiness?.getTransactions()!!.subscribe(this::handlerResponse)
+            this.transactionBusiness?.getTransactions()!!.subscribe(this::handleResponse, this::handleError)
         )
     }
 
@@ -58,7 +58,12 @@ class TransactionsActivity : BaseActivity() {
         recyclerView?.layoutManager = layoutManager
     }
 
-    private fun handlerResponse(transactions: BaseResponse<Transaction>) {
+    private fun handleResponse(transactions: BaseResponse<Transaction>) {
         recyclerView?.adapter = TransactionAdapter(transactions.items, this)
     }
+
+    private fun handleError(error: Throwable) {
+        Toast.makeText(this, "Ops! Tente novamente mais tarde.", Toast.LENGTH_LONG).show()
+    }
+
 }

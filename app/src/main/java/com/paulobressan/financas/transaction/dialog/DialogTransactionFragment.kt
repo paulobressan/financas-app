@@ -31,8 +31,7 @@ class DialogTransactionFragment(
     private var compositeDisposable: CompositeDisposable? = null
     private var transactionBusiness: TransactionBusiness? = null
     private var binding: DialogTransactionBinding? = null
-
-    private var categories = listOf(Category(1, "Pagamento Labs"), Category(2, "Alimentação"))
+    private var categories: List<Category>? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,17 +53,17 @@ class DialogTransactionFragment(
     }
 
     private fun initDialog() {
-
         setupSuffixSample(binding!!)
 
         binding?.textTitle?.text = this.title
 
+
         binding?.buttonAdd?.setOnClickListener {
             var transaction = Transaction(
-                categories[binding?.spinnerCategories!!.selectedItemPosition],
-                SimpleDateFormat("dd/MM/yyyy").parse(binding?.editDate?.text.toString())!!,
-                binding?.editValue?.text.toString().toDouble(),
-                this.transactionType
+                category = categories?.get(binding?.spinnerCategories!!.selectedItemPosition)!!,
+                date = SimpleDateFormat("dd/MM/yyyy").parse(binding?.editDate?.text.toString())!!,
+                value = binding?.editValue?.text.toString().toDouble(),
+                transactionType = this.transactionType
             )
 
             confirm(transaction)

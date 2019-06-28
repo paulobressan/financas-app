@@ -9,10 +9,14 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Network {
-    private const val URL = "http://192.168.0.109:5000"
+    private const val URL = "http://10.53.19.107:5000"
 
     fun getTransactions(): Observable<BaseResponse<Transaction>> {
         return getRetrofit().create(TransactionAPI::class.java).getTransactions()
+    }
+
+    fun postTransactions(transaction: Transaction): Observable<BaseResponse<Transaction>> {
+        return getRetrofit().create(TransactionAPI::class.java).postTransactions(transaction)
     }
 
     fun getCategories(): Observable<BaseResponse<Category>> {
