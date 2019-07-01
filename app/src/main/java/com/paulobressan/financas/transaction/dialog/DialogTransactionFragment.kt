@@ -17,10 +17,9 @@ import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.network.BaseResponse
 import com.paulobressan.financas.transaction.TransactionBusiness
-import com.redmadrobot.inputmask.MaskedTextChangedListener
-import com.redmadrobot.inputmask.helper.AffinityCalculationStrategy
 import io.reactivex.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
+import java.util.*
 
 
 class DialogTransactionFragment(
@@ -28,10 +27,10 @@ class DialogTransactionFragment(
     private val transactionType: Int,
     private val confirm: (transaction: Transaction) -> Unit
 ) : DialogFragment() {
-    private var compositeDisposable: CompositeDisposable? = null
-    private var transactionBusiness: TransactionBusiness? = null
-    private var binding: DialogTransactionBinding? = null
-    private var categories: List<Category>? = null
+    private var compositeDisposable = CompositeDisposable()
+    private var transactionBusiness = TransactionBusiness()
+    private lateinit var binding: DialogTransactionBinding
+    private var categories: List<Category> = Collections.emptyList()
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -42,27 +41,22 @@ class DialogTransactionFragment(
             false
         )
 
-        compositeDisposable = CompositeDisposable()
-        transactionBusiness = TransactionBusiness()
-
         initDialog()
 
         loadSpinner()
 
-        return binding?.root
+        return binding.root
     }
 
     private fun initDialog() {
-        setupSuffixSample(binding!!)
-
-        binding?.textTitle?.text = this.title
+        binding.textTitle.text = this.title
 
 
-        binding?.buttonAdd?.setOnClickListener {
-            var transaction = Transaction(
-                category = categories?.get(binding?.spinnerCategories!!.selectedItemPosition)!!,
-                date = SimpleDateFormat("dd/MM/yyyy").parse(binding?.editDate?.text.toString())!!,
-                value = binding?.editValue?.text.toString().toDouble(),
+        binding.buttonAdd.setOnClickListener {
+            val transaction = Transaction(
+                category = categories[binding.spinnerCategories.selectedItemPosition],
+                date = SimpleDateFormat("dd/MM/yyyy").parse(binding.editDate.text.toString())!!,
+                value = binding.editValue.text.toString().toDouble(),
                 transactionType = this.transactionType
             )
 
@@ -72,32 +66,19 @@ class DialogTransactionFragment(
     }
 
     private fun loadSpinner() {
-        this.compositeDisposable?.add(
-            this.transactionBusiness?.getCategories()!!.subscribe(this::handlerResponse)
+        this.compositeDisposable.add(
+            this.transactionBusiness.getCategories().subscribe(this::handlerResponse)
         )
     }
 
     private fun handlerResponse(categories: BaseResponse<Category>) {
         val adapter = CategoryTransactionAdapter(activity as AppCompatActivity, categories.items)
-        binding?.spinnerCategories?.adapter = adapter
+        binding.spinnerCategories.adapter = adapter
     }
 
     override fun onStart() {
         super.onStart()
         this.dialog.window!!.setLayout(MATCH_PARENT, WRAP_CONTENT)
-    }
-
-    private fun setupSuffixSample(binding: DialogTransactionBinding) {
-        val affineFormats = listOf(
-            "[00]/[00]/[0000]"
-        )
-
-        MaskedTextChangedListener.installOn(
-            binding.editDate,
-            affineFormats[0],
-            affineFormats,
-            AffinityCalculationStrategy.WHOLE_STRING
-        )
     }
 
     companion object {

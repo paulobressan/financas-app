@@ -4,19 +4,19 @@ import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.network.BaseResponse
 import com.paulobressan.financas.network.Network
-import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
 class TransactionBusiness {
-    fun getTransactions(): Observable<BaseResponse<Transaction>> {
+    fun getTransactions(): Single<BaseResponse<Transaction>> {
         return Network.getTransactions()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
     }
 
-    fun getCategories(): Observable<BaseResponse<Category>> {
+    fun getCategories(): Single<BaseResponse<Category>> {
         return Network.getCategories()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

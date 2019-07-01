@@ -3,7 +3,7 @@ package com.paulobressan.financas.network
 import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.transaction.TransactionAPI
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,15 +11,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Network {
     private const val URL = "http://10.53.19.107:5000"
 
-    fun getTransactions(): Observable<BaseResponse<Transaction>> {
+    fun getTransactions(): Single<BaseResponse<Transaction>> {
         return getRetrofit().create(TransactionAPI::class.java).getTransactions()
     }
 
-    fun postTransactions(transaction: Transaction): Observable<BaseResponse<Transaction>> {
+    fun postTransactions(transaction: Transaction): Single<BaseResponse<Transaction>> {
         return getRetrofit().create(TransactionAPI::class.java).postTransactions(transaction)
     }
 
-    fun getCategories(): Observable<BaseResponse<Category>> {
+    fun getCategories(): Single<BaseResponse<Category>> {
         return getRetrofit().create(TransactionAPI::class.java).getCategories()
     }
 

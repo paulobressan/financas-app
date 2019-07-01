@@ -10,13 +10,11 @@ import com.paulobressan.financas.enum.TransactionType
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.network.BaseResponse
 import com.paulobressan.financas.transaction.dialog.DialogTransactionFragment
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_transactions.*
 
 class TransactionsActivity : BaseActivity() {
-    private var compositeDisposable: CompositeDisposable? = null
-    private var transactionBusiness: TransactionBusiness? = null
-    private var recyclerView: RecyclerView? = null
+    private var transactionBusiness = TransactionBusiness()
+    private lateinit var recyclerView: RecyclerView
 
     override fun layoutId(): Int {
         return R.layout.activity_transactions
@@ -24,8 +22,6 @@ class TransactionsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        compositeDisposable = CompositeDisposable()
-        transactionBusiness = TransactionBusiness()
 
         initRecyclerView()
         initFabButton()
@@ -34,8 +30,8 @@ class TransactionsActivity : BaseActivity() {
     }
 
     private fun loadTransactions() {
-        this.compositeDisposable?.add(
-            this.transactionBusiness?.getTransactions()!!.subscribe(this::handleResponse, this::handleError)
+        this.addCompose(
+            this.transactionBusiness.getTransactions().subscribe(this::handleResponse, this::handleError)
         )
     }
 
@@ -55,11 +51,11 @@ class TransactionsActivity : BaseActivity() {
         recyclerView = lista_transacoes_recyclerview
 
         val layoutManager = LinearLayoutManager(this)
-        recyclerView?.layoutManager = layoutManager
+        recyclerView.layoutManager = layoutManager
     }
 
     private fun handleResponse(transactions: BaseResponse<Transaction>) {
-        recyclerView?.adapter = TransactionAdapter(transactions.items, this)
+        recyclerView.adapter = TransactionAdapter(transactions.items, this)
     }
 
     private fun handleError(error: Throwable) {
