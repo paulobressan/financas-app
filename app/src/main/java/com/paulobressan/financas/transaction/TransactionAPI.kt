@@ -20,5 +20,5 @@ interface TransactionAPI {
     fun getCategories(): Single<BaseResponse<Category>>
 
     @POST("/transactions")
-    fun postTransactions(@Body transaction: Transaction): Single<BaseResponse<Transaction>>
+    fun postTransactions(@Body transaction: TransactionEntity): Single<BaseResponse<Transaction>>
 }

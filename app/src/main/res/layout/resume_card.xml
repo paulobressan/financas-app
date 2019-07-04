@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                   xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+                                   xmlns:tools="http://schemas.android.com/tools"
+                                   android:orientation="vertical"
                                    android:layout_width="match_parent"
                                    android:layout_height="wrap_content"
                                    app:cardElevation="0dp"
@@ -39,21 +40,6 @@
                 android:layout_height="0dp"
                 android:id="@+id/txtvDespesaValor" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtvReceitaValor" android:layout_marginTop="8dp"
-                android:textSize="18sp" android:textStyle="bold"/>
-        <TextView
-                android:text="@string/total"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtvTotal" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtvDespesa"
-                android:layout_marginTop="8dp" app:layout_constraintEnd_toStartOf="@+id/txtvTotalValor"
-                android:layout_marginEnd="8dp" android:textSize="18sp" android:textAllCaps="true"/>
-        <TextView
-                android:text="@string/valor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtvTotalValor" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtvDespesaValor" android:layout_marginTop="8dp"
                 android:textSize="18sp" android:textStyle="bold"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

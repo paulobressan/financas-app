@@ -3,6 +3,7 @@ package com.paulobressan.financas.network
 import com.paulobressan.financas.model.Category
 import com.paulobressan.financas.model.Transaction
 import com.paulobressan.financas.transaction.TransactionAPI
+import com.paulobressan.financas.transaction.TransactionEntity
 import io.reactivex.Single
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -15,7 +16,7 @@ object Network {
         return getRetrofit().create(TransactionAPI::class.java).getTransactions()
     }
 
-    fun postTransactions(transaction: Transaction): Single<BaseResponse<Transaction>> {
+    fun postTransactions(transaction: TransactionEntity): Single<BaseResponse<Transaction>> {
         return getRetrofit().create(TransactionAPI::class.java).postTransactions(transaction)
     }
 

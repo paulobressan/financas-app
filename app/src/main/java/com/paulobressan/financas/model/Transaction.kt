@@ -9,5 +9,6 @@ data class Transaction(
     val category: Category,
     val date: Date,
     val value: Double,
+    @SerializedName("type")
     val transactionType: Int
 )

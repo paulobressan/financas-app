@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class TransactionBusiness {
+object TransactionBusiness {
     fun getTransactions(): Single<BaseResponse<Transaction>> {
         return Network.getTransactions()
             .observeOn(AndroidSchedulers.mainThread())
@@ -18,6 +18,12 @@ class TransactionBusiness {
 
     fun getCategories(): Single<BaseResponse<Category>> {
         return Network.getCategories()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+    }
+
+    fun postTransaction(transaction: TransactionEntity): Single<BaseResponse<Transaction>>{
+        return Network.postTransactions(transaction)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
     }

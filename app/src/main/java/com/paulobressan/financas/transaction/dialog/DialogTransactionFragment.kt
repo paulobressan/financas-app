@@ -19,7 +19,6 @@ import com.paulobressan.financas.network.BaseResponse
 import com.paulobressan.financas.transaction.TransactionBusiness
 import io.reactivex.disposables.CompositeDisposable
 import java.text.SimpleDateFormat
-import java.util.*
 
 
 class DialogTransactionFragment(
@@ -28,9 +27,7 @@ class DialogTransactionFragment(
     private val confirm: (transaction: Transaction) -> Unit
 ) : DialogFragment() {
     private var compositeDisposable = CompositeDisposable()
-    private var transactionBusiness = TransactionBusiness()
     private lateinit var binding: DialogTransactionBinding
-    private var categories: List<Category> = Collections.emptyList()
 
     @SuppressLint("SimpleDateFormat")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,7 +51,7 @@ class DialogTransactionFragment(
 
         binding.buttonAdd.setOnClickListener {
             val transaction = Transaction(
-                category = categories[binding.spinnerCategories.selectedItemPosition],
+                category = binding.spinnerCategories.selectedItem as Category,
                 date = SimpleDateFormat("dd/MM/yyyy").parse(binding.editDate.text.toString())!!,
                 value = binding.editValue.text.toString().toDouble(),
                 transactionType = this.transactionType
@@ -67,7 +64,7 @@ class DialogTransactionFragment(
 
     private fun loadSpinner() {
         this.compositeDisposable.add(
-            this.transactionBusiness.getCategories().subscribe(this::handlerResponse)
+            TransactionBusiness.getCategories().subscribe(this::handlerResponse)
         )
     }
 
